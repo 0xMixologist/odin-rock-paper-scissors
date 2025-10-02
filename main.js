@@ -53,5 +53,19 @@ function playRound (compMove, playerMove) {
   }
 }
 
-console.log(playRound(getComputerChoice(),getHumanChoice(prompt_message)));
+function playGame() {
+  for (let i = 0; i < 5; i++) {
+    playRound (getComputerChoice(), getHumanChoice(prompt_message));
+  }
+  if (computerScore > humanScore) {
+    return `The computer wins the game. Score -> Computer: ${computerScore} Human: ${humanScore}`;
+  } else if (computerScore < humanScore) {
+    return `You win the game. Score -> Computer: ${computerScore} Human: ${humanScore}`;
+  } else {
+    return "It's a tie";
+  }
+}
+
+
+console.log(playGame());
 
