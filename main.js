@@ -1,4 +1,6 @@
 let prompt_message = "Make your move! "
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
   let value = Math.random();
@@ -13,14 +15,12 @@ function getComputerChoice() {
   return compMove;
 }
 
-console.log(getComputerChoice());
     
 function getHumanChoice(message) {
   let input = prompt(message);
   let fchar = input[0].toUpperCase();
   let rest = (input.slice(1, input.length)).toLowerCase();
   let playerMove = fchar + rest;
-  console.log("This is the player move: " + playerMove);
   if (playerMove != "Rock" && playerMove != "Paper" && playerMove != "Scissors") { 
     return 1;
   } else {
@@ -28,6 +28,30 @@ function getHumanChoice(message) {
   }
 }
 
-console.log(getHumanChoice(prompt_message));
 
+function playRound (compMove, playerMove) {
+  let result;
+  if (compMove === playerMove) {
+    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
+    return "Tie";
+  } else if (compMove === "Scissors" && playerMove === "Paper") {
+    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
+    computerScore += 1;
+    return "You lose, scissors beats paper!";
+  } else if (compMove === "Rock" && playerMove === "Scissors") {
+    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
+    computerScore += 1;
+    return "You lose, rock beats scissors";
+  } else if (compMove === "Paper" && playerMove === "Rock") {
+    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
+    computerScore += 1;
+    return "You lose, paper beats scissors";
+  } else {
+    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
+    humanScore += 1;
+    return "You win";
+  }
+}
+
+console.log(playRound(getComputerChoice(),getHumanChoice(prompt_message)));
 
