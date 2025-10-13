@@ -76,11 +76,13 @@ function playRound (compMove, playerMove) {
 function checkRestart() {
   if (humanScore === 5) {
     result.textContent = "You win the game!";
-    restart();
+    buttons.removeEventListener("click", getPlayerMove);
+    buttons.addEventListener("click", restart);
     return;
   } else if (computerScore === 5) {
     result.textContent = "Computer wins the game!";
-    restart();
+    buttons.removeEventListener("click", getPlayerMove);
+    buttons.addEventListener("click", restart);
     return;
   } else {
     return;
@@ -88,6 +90,20 @@ function checkRestart() {
 }
 
 function restart() {
+
+  message1.textContent = "";
+  message2.textContent = "";
+  humanScore = 0;
+  computerScore = 0;
+  pscore.textContent = "0";
+  cscore.textContent = "0";
+  result.textContent = "";
+
+  buttons.removeEventListener("click", restart);
+  buttons.addEventListener("click", getPlayerMove);
+
+  return;
+
 }
 
   
