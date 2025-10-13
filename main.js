@@ -1,31 +1,48 @@
-let prompt_message = "Make your move! "
 let humanScore = 0;
 let computerScore = 0;
+let buttons = document.querySelector(".js-buttons");
+const score = document.querySelector(".js-score");
+//const display = document.createElement("div");
+//const message = document.createElement("span");
 
-function getComputerChoice() {
+function computerMove() {
   let value = Math.random();
   let compMove;
   if (value < 0.33) {
-    compMove = "Rock"
+    compMove = 'rock'
   } else if (value >= 0.33 && value < 0.66) {
-    compMove = "Paper"
+    compMove = 'paper'
   } else {
-    compMove = "Scissors"
+    compMove = 'scissors'
   }
   return compMove;
 }
 
     
-function getHumanChoice(message) {
-  let input = prompt(message);
-  let fchar = input[0].toUpperCase();
-  let rest = (input.slice(1, input.length)).toLowerCase();
-  let playerMove = fchar + rest;
-  if (playerMove != "Rock" && playerMove != "Paper" && playerMove != "Scissors") { 
-    return 1;
-  } else {
-    return playerMove;
-  }
+function getPlayerMove(e) {
+  //avoid page reload
+  e.preventDefault();
+  const playerMove;
+  //create event listener to store the player's move
+  buttons.addEventListener("click", (e) => {
+    let target = e.target
+
+    switch (target.id) {
+      case 'rock':
+        playerMove = 'rock';
+        break;
+      case 'paper':
+        playerMove = 'paper';
+        break;
+      case 'scissors':
+        playerMove = 'scissors';
+        break;
+    }
+
+  computerMove()
+  message.textContent = playRound();
+
+
 }
 
 
@@ -67,5 +84,4 @@ function playGame() {
 }
 
 
-console.log(playGame());
 
