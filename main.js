@@ -2,6 +2,9 @@ let humanScore = 0;
 let computerScore = 0;
 let buttons = document.querySelector(".js-buttons");
 const score = document.querySelector(".js-score");
+const message = document.querySelector(".result");
+const pscore = document.querySelector("#player-score");
+const cscore = document.querySelector("#computer-score");
 //const display = document.createElement("div");
 //const message = document.createElement("span");
 
@@ -19,28 +22,34 @@ function computerMove() {
 }
 
     
+buttons.addEventListener("click", getPlayerMove);
+
 function getPlayerMove(e) {
   //avoid page reload
   e.preventDefault();
-  const playerMove;
-  //create event listener to store the player's move
-  buttons.addEventListener("click", (e) => {
-    let target = e.target
+  let playerMove;
+  let target = e.target;
 
-    switch (target.id) {
-      case 'rock':
-        playerMove = 'rock';
-        break;
-      case 'paper':
-        playerMove = 'paper';
-        break;
-      case 'scissors':
-        playerMove = 'scissors';
-        break;
-    }
+  switch (target.id) {
+    case 'rock':
+      playerMove = 'rock';
+      break;
+    case 'paper':
+      playerMove = 'paper';
+      break;
+    case 'scissors':
+      playerMove = 'scissors';
+      break;
+  }
+    
+
 
   computerMove()
   message.textContent = playRound();
+  pscore.textContent = humanScore.toString();
+  cscore.textContent = computerScore.toString();
+
+  
 
 
 }
