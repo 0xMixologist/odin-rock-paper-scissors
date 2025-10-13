@@ -2,9 +2,11 @@ let humanScore = 0;
 let computerScore = 0;
 let buttons = document.querySelector(".js-buttons");
 const score = document.querySelector(".js-score");
-const message = document.querySelector(".result");
+const message1 = document.querySelector("#message1");
+const message2 = document.querySelector("#message2");
 const pscore = document.querySelector("#player-score");
 const cscore = document.querySelector("#computer-score");
+const result = document.querySelector("#result");
 //const display = document.createElement("div");
 //const message = document.createElement("span");
 
@@ -41,35 +43,27 @@ function getPlayerMove(e) {
       playerMove = 'scissors';
       break;
   }
-    
 
-
-  computerMove()
-  message.textContent = playRound();
+  message2.textContent = playRound(computerMove(), playerMove);
   pscore.textContent = humanScore.toString();
   cscore.textContent = computerScore.toString();
 
-  
-
+  checkRestart();
 
 }
 
-
 function playRound (compMove, playerMove) {
   let result;
+  message1.textContent = `Computer played ${compMove}, and user played ${playerMove}`; 
   if (compMove === playerMove) {
-    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
     return "Tie";
-  } else if (compMove === "Scissors" && playerMove === "Paper") {
-    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
+  } else if (compMove === "scissors" && playerMove === "paper") {
     computerScore += 1;
     return "You lose, scissors beats paper!";
-  } else if (compMove === "Rock" && playerMove === "Scissors") {
-    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
+  } else if (compMove === "rock" && playerMove === "scissors") {
     computerScore += 1;
     return "You lose, rock beats scissors";
-  } else if (compMove === "Paper" && playerMove === "Rock") {
-    console.log(`Computer played ${compMove}, and user played ${playerMove}`)
+  } else if (compMove === "paper" && playerMove === "rock") {
     computerScore += 1;
     return "You lose, paper beats scissors";
   } else {
@@ -79,18 +73,24 @@ function playRound (compMove, playerMove) {
   }
 }
 
-function playGame() {
-  for (let i = 0; i < 5; i++) {
-    playRound (getComputerChoice(), getHumanChoice(prompt_message));
-  }
-  if (computerScore > humanScore) {
-    return `The computer wins the game. Score -> Computer: ${computerScore} Human: ${humanScore}`;
-  } else if (computerScore < humanScore) {
-    return `You win the game. Score -> Computer: ${computerScore} Human: ${humanScore}`;
+function checkRestart() {
+  if (humanScore === 5) {
+    result.textContent = "You win the game!";
+    restart();
+    return;
+  } else if (computerScore === 5) {
+    result.textContent = "Computer wins the game!";
+    restart();
+    return;
   } else {
-    return "It's a tie";
+    return;
   }
 }
 
+function restart() {
+}
 
+  
+
+    
 
